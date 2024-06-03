@@ -1,0 +1,16 @@
+Test Cases:
+
+Normal Cases:
+- Initialize contract with valid WETH address and yearly yield.
+- Verify contract deployment with correct owner.
+- Ensure reward pool is set to the predefined amount.
+
+Edge Cases:
+- Attempt initialization with zero address.
+- Attempt initialization with zero yearly yield.
+- Attempt initialization with an invalid token contract.
+
+Multi-Interaction Cases:
+- Deploy the contract, then verify multiple initializations fail.
+- Initialize with varying amounts and check reward pool adjustments.
+- Initialize and then try changing ownership immediately.

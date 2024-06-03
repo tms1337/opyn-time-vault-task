@@ -1,0 +1,16 @@
+Test Cases:
+
+Normal Cases:
+- Single user deposit.
+- Multiple deposits by a single user.
+- Multiple users deposit.
+
+Edge Cases:
+- Deposit zero amount.
+- Deposit without sufficient WETH balance.
+- Rapid successive deposits by a user.
+
+Multi-Interaction Cases:
+- User deposits, another user deposits, first user deposits again.
+- Users deposit and withdraw (interleaved).
+- Owner deposits rewards, then users deposit.

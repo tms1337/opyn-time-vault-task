@@ -1,0 +1,16 @@
+Test Cases:
+
+Normal Cases:
+User withdraws after single deposit.
+User withdraws after multiple deposits.
+User withdraws after reward calculation.
+
+Edge Cases:
+Withdraw with zero deposits.
+Withdraw immediately after deposit (minimal rewards).
+Withdraw after partial reward pool depletion.
+
+Multi-Interaction Cases:
+Multiple users withdrawing simultaneously.
+Users withdraw after deposits and owner adds more rewards.
+Users withdraw, deposit again, then withdraw.

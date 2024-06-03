@@ -1,0 +1,16 @@
+Test Cases:
+
+Normal Cases:
+- Owner deposits WETH into reward pool.
+- Ensure non-owner cannot deposit rewards.
+- Validate reward pool balance after deposits.
+
+Edge Cases:
+- Attempt deposit of zero amount.
+- Owner deposit exceeding their WETH balance.
+- Rapid successive deposits by owner.
+
+Multi-Interaction Cases:
+- Owner deposits, then non-owner attempts.
+- Multiple owners (via ownership transfer) deposit.
+- Owner deposits followed by reward percentage change.

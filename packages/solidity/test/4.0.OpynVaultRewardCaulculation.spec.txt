@@ -1,0 +1,16 @@
+Test Cases:
+
+Normal Cases:
+Calculate reward for a single deposit.
+Calculate reward for multiple deposits.
+Calculate reward for different durations.
+
+Edge Cases:
+Calculate reward for zero deposit duration.
+Calculate reward with zero deposit amount.
+Calculate reward with minimal duration difference.
+
+Multi-Interaction Cases:
+Calculate rewards after multiple deposits and withdrawals.
+Different users with overlapping deposit periods.
+Users deposit, calculate reward, then deposit again and recalculate.
