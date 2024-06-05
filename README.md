@@ -47,7 +47,7 @@ yarn start
 
 - click to watch the entire mini-demo
 
-[![Watch the video](https://imgur.com/Wlp0f17.png)](https://www.youtube.com/watch?v=DWh0thjnf)
+[![Watch the video](https://imgur.com/Wlp0f17.png)](https://www.youtube.com/watch?v=DWh0thjnf-o)
 
 
 
