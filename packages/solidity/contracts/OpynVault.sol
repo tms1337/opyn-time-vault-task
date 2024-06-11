@@ -22,14 +22,17 @@ contract OpynVault is Ownable {
 
     uint256 public rewardPool;
 
-    struct Deposit {
+    struct UserDeposit {
         // use same uint width
         // for stacking
         uint256 amount;
         uint256 timestamp;
     }
-    mapping(address => Deposit[]) public depositsByUser;
+    mapping(address => UserDeposit[]) public depositsByUser;
     mapping(address => uint256) public totalDepositsByUser;
+
+    // events
+    event Deposit(address indexed user, uint256 amount);
 
     // helpers
 
@@ -128,7 +131,7 @@ contract OpynVault is Ownable {
         uint256 balanceAfter = token.balanceOf(address(this));
         assert(balanceAfter > balanceBefore);
         
-        Deposit memory newDeposit = Deposit({
+        UserDeposit memory newDeposit = UserDeposit({
             amount: _amount,
             timestamp: block.timestamp
         });
@@ -139,13 +142,15 @@ contract OpynVault is Ownable {
         uint256 totalAfter = totalDepositsByUser[user];
         assert(totalAfter > totalBefore);
 
+        emit Deposit(user, _amount);
+
         return (true, _amount);
     }
     
     function calculateReward(address _user) public view returns (uint256) {
         require(_user != address(0), "Must be non-zero user address");
     
-        Deposit[] memory userDeposits = depositsByUser[_user];
+        UserDeposit[] memory userDeposits = depositsByUser[_user];
         uint256 reward = 0;
 
         for (uint i = 0; i < userDeposits.length; i++) {
