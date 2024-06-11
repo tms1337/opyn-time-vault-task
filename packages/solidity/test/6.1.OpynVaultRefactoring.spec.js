@@ -45,12 +45,13 @@ describe("OpynVault Contract Enhancements Tests", function () {
     } catch (error) {}
   });
 
-  // it("Should correctly handle withdrawals", async function () {
-  //   await opynVault.connect(addr1).deposit(ethers.parseEther("100"));
-  //   await expect(opynVault.connect(addr1).withdraw())
-  //     .to.emit(opynVault, "Withdrawal")
-  //     .withArgs(await addr1.getAddress(), ethers.parseEther("105")); // Assumes 5% yield
-  // });
+  it("Should correctly handle withdrawals", async function () {
+    await opynVault.connect(addr1).deposit(ethers.parseEther("100"));
+    await expect(opynVault.connect(addr1).withdraw()).to.emit(
+      opynVault,
+      "Withdrawal"
+    );
+  });
 
   // it("Should ensure only owner can deposit rewards", async function () {
   //   await expect(

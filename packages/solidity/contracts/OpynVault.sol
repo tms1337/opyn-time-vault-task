@@ -34,6 +34,7 @@ contract OpynVault is Ownable, ReentrancyGuard {
 
     // events
     event Deposit(address indexed user, uint256 amount);
+    event Withdrawal(address indexed user, uint256 amount);
 
     // helpers
 
@@ -343,6 +344,8 @@ contract OpynVault is Ownable, ReentrancyGuard {
 
         delete depositsByUser[user];
         delete totalDepositsByUser[user]; 
+
+        emit Withdrawal(user, totalWithdrawal);
         
         return (true, totalWithdrawal);
     }
