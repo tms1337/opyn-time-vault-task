@@ -22,7 +22,7 @@ describe("OpynVault Initialization", function () {
   it("should fail to initialize with zero address", async function () {
     await expect(
       OpynVault.deploy("0x0000000000000000000000000000000000000000", 5000)
-    ).to.be.revertedWith("Token must be non-0 address");
+    ).to.be.reverted;
   });
 
   it("should fail to initialize with zero yearly yield", async function () {

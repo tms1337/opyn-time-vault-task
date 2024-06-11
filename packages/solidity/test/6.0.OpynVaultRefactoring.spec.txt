@@ -1,0 +1,9 @@
+Test Cases:
+
+Normal Cases:
+Emits Deposit event.
+Emits Withdrawal event.
+
+Edge Cases:
+Does not allow Reentrancy.
+Has some standard compatibility.
