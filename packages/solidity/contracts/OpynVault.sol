@@ -74,6 +74,10 @@ contract OpynVault is Ownable, ReentrancyGuard {
         return rewardPool;
     }
 
+    function totalAssets() external view returns (uint256) {
+        return rewardPool;
+    }
+
     function getToken() external view returns (address) {
         return address(token);
     }
