@@ -14,6 +14,8 @@ contract OpynVault is Ownable, ReentrancyGuard {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
 
+    bool public constant IS_DEBUG = false;
+
     // uint256 public constant TOTAL_TIME_IN_A_YEAR = 365*24*60*60;
     uint256 public constant TOTAL_TIME_IN_A_YEAR = 31536000;
 
@@ -160,31 +162,31 @@ contract OpynVault is Ownable, ReentrancyGuard {
         uint256 reward = 0;
 
         for (uint i = 0; i < userDeposits.length; i++) {
-            console.log(
+            if(IS_DEBUG) console.log(
                 "[calculateReward]", 
                 " #1",
                 " userDeposits[i].timestamp = ",
                 userDeposits[i].timestamp
             );
-            console.log(
+            if(IS_DEBUG) console.log(
                 "[calculateReward]", 
                 " #1",
                 " block.timestamp = ",
                 block.timestamp
             );
-            console.log(
+            if(IS_DEBUG) console.log(
                 "[calculateReward]", 
                 " #1",
                 " userDeposits[i].amount = ",
                 userDeposits[i].amount
             );
-            console.log(
+            if(IS_DEBUG) console.log(
                 "[calculateReward]", 
                 " #1",
                 " yearlyYield = ",
                 yearlyYield
             );
-            console.log(" ");
+            if(IS_DEBUG) console.log(" ");
 
             uint256 yield = calculateYield(
                 userDeposits[i].amount,
@@ -207,32 +209,32 @@ contract OpynVault is Ownable, ReentrancyGuard {
     ) public pure returns (uint256) {
 
         uint256 deltaT = _end_time.sub(_start_time);
-        console.log(
+        if(IS_DEBUG) console.log(
             "[yield]", 
             " #1",
             " deltaT = ",
             deltaT
         );
-        console.log(" ");
+        if(IS_DEBUG) console.log(" ");
         
         uint256 yearlyAmount = _amount.mul(_yearlyYield);
         uint256 yieldAmount = (deltaT.mul(yearlyAmount))
             .div(TOTAL_TIME_IN_A_YEAR)
             .div(1000) // due to proms format
             .div(100); // due to being perc
-        console.log(
+        if(IS_DEBUG) console.log(
             "[yield]", 
             " #2",
             " yearlyAmount = ",
             yearlyAmount
         );
-        console.log(
+        if(IS_DEBUG) console.log(
             "[yield]", 
             " #2",
             " yieldAmount = ",
             yieldAmount
         );
-        console.log(" ");
+        if(IS_DEBUG) console.log(" ");
 
         return yieldAmount;
     }
@@ -241,7 +243,7 @@ contract OpynVault is Ownable, ReentrancyGuard {
         address user = msg.sender;
         uint256 totalUserDepositAmount = totalDepositsByUser[user];
 
-        console.log(
+        if(IS_DEBUG) console.log(
             "[withdraw]", 
             " #1",
             " totalUserDepositAmount = ",
@@ -253,48 +255,48 @@ contract OpynVault is Ownable, ReentrancyGuard {
             return (false, 0);
         }
 
-        console.log(
+        if(IS_DEBUG) console.log(
             "[withdraw]", 
             " #1",
             " totalUserDepositAmount = ",
             totalUserDepositAmount
         );
-        console.log(
+        if(IS_DEBUG) console.log(
             "[withdraw]", 
             " #1",
             " rewardPool = ",
             rewardPool
         );
-        console.log(" ");
+        if(IS_DEBUG) console.log(" ");
 
         uint256 totalReward = calculateReward(user);
         uint256 totalWithdrawal = totalUserDepositAmount + totalReward;
 
-        console.log(
+        if(IS_DEBUG) console.log(
             "[withdraw]", 
             " #2",
             " totalWithdrawal = ",
             totalWithdrawal
         );
-        console.log(
+        if(IS_DEBUG) console.log(
             "[withdraw]", 
             " #2",
             " totalReward = ",
             totalReward
         );
-        console.log(
+        if(IS_DEBUG) console.log(
             "[withdraw]", 
             " #2",
             " totalUserDepositAmount = ",
             totalUserDepositAmount
         );
-        console.log(
+        if(IS_DEBUG) console.log(
             "[withdraw]", 
             " #2",
             "balance(user) before =",
             token.balanceOf(user)
         );
-        console.log(" ");
+        if(IS_DEBUG) console.log(" ");
 
         // calculation sanity check
         // cant lose money
@@ -305,43 +307,43 @@ contract OpynVault is Ownable, ReentrancyGuard {
         token.safeTransfer(user, totalWithdrawal);
         uint256 totalAfter = token.balanceOf(address(this));
 
-        console.log(
+        if(IS_DEBUG) console.log(
             "[withdraw]", 
             " #3",
             " totalBefore = ",
             totalBefore
         );
-        console.log(
+        if(IS_DEBUG) console.log(
             "[withdraw]", 
             " #3",
             " totalAfter = ",
             totalAfter
         );
-        console.log(
+        if(IS_DEBUG) console.log(
             "[withdraw]", 
             " #3",
             "balance(user) after =",
             token.balanceOf(user)
         );
-        console.log(" ");
+        if(IS_DEBUG) console.log(" ");
 
         // assert(totalAfter - totalBefore == totalWithdrawal);
         
         // state changes
 
-        console.log(
+        if(IS_DEBUG) console.log(
             "[withdraw]", 
             " #4",
             " rewardPool = ",
             rewardPool
         );
-        console.log(
+        if(IS_DEBUG) console.log(
             "[withdraw]",
             " #4",
             " totalWithdrawal = ",
             totalWithdrawal
         );
-        console.log(" ");
+        if(IS_DEBUG) console.log(" ");
 
         rewardPool -= totalReward;
         assert(rewardPool >= 0);
